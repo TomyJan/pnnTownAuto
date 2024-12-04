@@ -1,0 +1,9 @@
+{
+    "logLevel": "debug",
+    "yezi": {
+        "username": "username",
+        "password": "password",
+        "projId": "865763"
+    },
+    "taskNum": 2
+}

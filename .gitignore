@@ -1,0 +1,8 @@
+# config
+config.json
+
+# logs
+logs/
+
+# node
+node_modules/
