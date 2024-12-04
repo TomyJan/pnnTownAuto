@@ -50,8 +50,7 @@ const yeziApiLoginUrl = `${yeziApiBaseUrl}logins?username=${yeziUsername}&passwo
 //     "leixing": "用户"
 //     }]
 //     }
-// const yeziGetMobileUrl = `${yeziApiBaseUrl}get_mobile?api_id=8416297&project_id=${yeziProjId}&token={{token}}`;
-const yeziGetMobileUrl = `${yeziApiBaseUrl}get_mobile?project_id=${yeziProjId}&token={{token}}`;
+const yeziGetMobileUrl = `${yeziApiBaseUrl}get_mobile?api_id=8416297&project_id=${yeziProjId}&token={{token}}`;
 // 返回示例:
 // {
 //     "message": "ok",
