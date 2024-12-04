@@ -13,6 +13,16 @@ export default class pnnTask {
     static pnnApiDrawPrizeUrl = `${pnnTask.pnnApiBaseUrl}draw/prize`;
 
     /**
+     * 延迟ms函数
+     * @param {number} ms 延迟的毫秒数
+     * @returns {Promise<void>} 空
+     */
+    static async sleep(ms) {
+        logger.info(`睡眠 ${ms}ms`);
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    /**
      * 发送验证码
      * @param {string} mobile 手机号
      * @returns {Promise<object|string>} 返回原始响应体，如果失败返回空字符串
@@ -108,6 +118,8 @@ export default class pnnTask {
                 // 做任务
                 // 1. egg/collect, 请求体为 egg_id, 1-18, 出错则重试一次, 如果还是出错, 跳过此蛋
                 for (let eggId = 1; eggId <= 18; eggId++) {
+                    // 随机延迟 50-233ms
+                    await pnnTask.sleep(Math.floor(Math.random() * 184) + 50);
                     const eggCollectRsp = await fetch(pnnTask.pnnApiEggCollectTaskUrl, {
                         method: 'POST',
                         headers: {
@@ -162,6 +174,8 @@ export default class pnnTask {
 
             // 简单粗暴抽奖 23 次, 其中 url param type=1 . 如果返回 code=1203 则说明已经抽奖完毕, 结束抽奖
             for (let i = 1; i < 25; i++) {
+                // 随机延迟 50-233ms
+                await pnnTask.sleep(Math.floor(Math.random() * 184) + 50);
                 const drawRsp = await fetch(`${pnnTask.pnnApiDrawUrl}?type=1`, {
                     headers: {
                         token,
