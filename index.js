@@ -239,7 +239,7 @@ function exit(code) {
         logger.info(`开始执行第 ${i + 1}/${taskNum} 次任务`);
         const mobile = await yeziGetMobile(token);
         if (mobile) {
-            const pnnSendCodeRsp = await pnnTask.sendCode(mobile);
+            const pnnSendCodeRsp = await pnnTask.sendCode(mobile, i + 1, taskNum);
             if (pnnSendCodeRsp && pnnSendCodeRsp.code === 200) {
                 logger.info(`${mobile} 发送验证码成功, 开始获取短信`);
                 let j = 0;
@@ -247,7 +247,7 @@ function exit(code) {
                     const message = await yeziGetMessage(token, mobile);
                     if (message) {
                         logger.info(`${mobile} 获取到短信: ${message}`);
-                        pnnTask.startTaskByCode(mobile, message);
+                        pnnTask.startTaskByCode(mobile, message, i + 1, taskNum);
                         yeziFreeMobile(token, mobile);
                         yeziAddlacklistMobile(token, mobile);
                         break;
@@ -269,5 +269,5 @@ function exit(code) {
         }
         await sleep(5000);
     }
-    logger.info(`任务执行完毕, 共执行 ${taskNum} 次`);
+    logger.info(`任务全部提交完毕, 共提交 ${taskNum} 次`);
 })();
