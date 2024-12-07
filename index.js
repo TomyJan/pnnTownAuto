@@ -189,7 +189,7 @@ async function yeziFreeMobile(token, mobile) {
  * @param {string} mobile 获取到的手机号
  * @returns {Promise<boolean>} 拉黑成功返回 true, 失败返回 false
  */
-async function yeziAddlacklistMobile(token, mobile) {
+async function yeziAddBlacklistMobile(token, mobile) {
     try {
         const blacklistUrl = yeziAddBlacklistUrl.replace('{{token}}', token).replace('{{mobile}}', mobile);
         logger.debug(`${mobile} 拉黑手机号, url=${blacklistUrl.replace(token, '***')}`);
@@ -249,7 +249,7 @@ function exit(code) {
                         logger.info(`${mobile} 获取到短信: ${message}`);
                         pnnTask.startTaskByCode(mobile, message, i + 1, taskNum);
                         yeziFreeMobile(token, mobile);
-                        yeziAddlacklistMobile(token, mobile);
+                        yeziAddBlacklistMobile(token, mobile);
                         break;
                     } else {
                         logger.debug(`${mobile} 未获取到短信, 2s 后继续获取`);
