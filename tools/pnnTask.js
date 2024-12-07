@@ -41,10 +41,10 @@ export default class pnnTask {
             });
             const json = await res.json();
             if (json.code) {
-                logger.debug(`${curTaskId}/${allTaskCount} ${mobile} 发送短信成功: ${JSON.stringify(json)}`);
+                logger.debug(`${curTaskId}/${allTaskCount} ${mobile} 发送短信请求成功: ${JSON.stringify(json)}`);
                 return json;
             } else {
-                logger.error(`${curTaskId}/${allTaskCount} ${mobile} 发送短信失败: ${JSON.stringify(json)}`);
+                logger.error(`${curTaskId}/${allTaskCount} ${mobile} 发送短信请求失败: ${JSON.stringify(json)}`);
                 return '';
             }
         } catch (err) {
