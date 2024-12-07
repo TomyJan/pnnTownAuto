@@ -262,6 +262,10 @@ function exit(code) {
                     yeziFreeMobile(token, mobile);
                 }
                 i++;
+            } else if (pnnSendCodeRsp?.code === 1001) {
+                // 发送验证码频繁, 冷却 5s
+                logger.error(`${mobile} 发送验证码失败: ${pnnSendCodeRsp.message}, 冷却 5s`);
+                await sleep(5000);
             } else {
                 logger.error(`${mobile} 发送验证码失败: ${JSON.stringify(pnnSendCodeRsp)}`);
                 yeziFreeMobile(token, mobile);
