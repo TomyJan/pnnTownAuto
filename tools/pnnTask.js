@@ -223,12 +223,12 @@ export default class pnnTask {
             // 取出 drawPrizeJson.data 数组, 判断 type_ename , 如果为 cdkey , 则将 code, 手机号, token, 当前 UTC+8 时间 追加到 data/prizeRecord/cdkey.txt 文件结尾. 否则, 将 item_name, 手机号, token, 当前 UTC+8 时间 追加到 data/prizeRecord/other.txt 文件结尾
             for (const prize of drawPrizeJson.data) {
                 if (prize.type_ename === 'cdkey') {
-                    fs.appendFileSync('data/prizeRecord/cdkey.txt', `${prize.code},帕尼尼小镇${mobile},验证码${code},token=${token}    ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n`);
+                    fs.appendFileSync('data/prizeRecord/cdkey.txt', `${prize.code},帕尼尼小镇${mobile},验证码${code},token=${token}    ${new Date(prize.create_time * 1000).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n`);
                 } else if (prize.type_ename === 'goods') {
-                    fs.appendFileSync('data/prizeRecord/goods.txt', `${prize.item_name},帕尼尼小镇${mobile},验证码${code},token=${token}    ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n`);
+                    fs.appendFileSync('data/prizeRecord/goods.txt', `${prize.item_name},帕尼尼小镇${mobile},验证码${code},token=${token}    ${new Date(prize.create_time * 1000).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n`);
                     logger.warn(`${curTaskId}/${allTaskCount} ${mobile} 抽到好东西啦: ${JSON.stringify(prize)}`);
                 } else {
-                    fs.appendFileSync('data/prizeRecord/other.txt', `${prize.item_name},帕尼尼小镇${mobile},验证码${code},token=${token}    ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n`);
+                    fs.appendFileSync('data/prizeRecord/other.txt', `${prize.item_name},帕尼尼小镇${mobile},验证码${code},token=${token}    ${new Date(prize.create_time * 1000).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}\n`);
                     logger.warn(`${curTaskId}/${allTaskCount} ${mobile} 抽到不知道啥类型的好东西啦: ${JSON.stringify(prize)}`);
                 }
             }
